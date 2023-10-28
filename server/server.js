@@ -4,6 +4,7 @@ var logger = require('morgan');
 var http = require('http');
 require('dotenv').config();
 const createError = require('http-errors');
+const path = require('path');
 
 var router = require('./routes/index');
 const errorHandler = require('./helpers/errorHandler');
@@ -17,6 +18,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', router);
 

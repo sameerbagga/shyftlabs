@@ -158,6 +158,8 @@ const AddResults = () => {
         setErrorFaced(false);
     }
 
+    const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
     if (errorFaced) {
         return (
             <SubmissionError prevPage={window.location.pathname} resetError={resetErrorFaced} err={err} />
@@ -193,12 +195,14 @@ const AddResults = () => {
                     ]}
                 >
                     <Select
+                        showSearch
                         allowClear
                         size="middle"
                         placeholder="Select Student"
                         style={{
                             width: '100%',
                         }}
+                        filterOption={filterOption}
                         options={students}
                     />
                 </Form.Item>
@@ -214,12 +218,14 @@ const AddResults = () => {
                     ]}
                 >
                     <Select
+                        showSearch
                         allowClear
                         size="middle"
                         placeholder="Select Course"
                         style={{
                             width: '100%',
                         }}
+                        filterOption={filterOption}
                         options={courses}
                     />
                 </Form.Item>
@@ -235,12 +241,14 @@ const AddResults = () => {
                     ]}
                 >
                     <Select
+                        showSearch
                         allowClear
                         size="middle"
                         placeholder="Select Score"
                         style={{
                             width: '100%',
                         }}
+                        filterOption={filterOption}
                         options={scores}
                     />
                 </Form.Item>
