@@ -12,10 +12,11 @@ router.post('/', postResult);
 
 async function getResults(req, res, next) {
     try {
-        const resultsData = await dbConn.select('c.name as course', 's.first_name', 's.family_name', 'r.score')
+        const resultsData = await dbConn.select('r.uid', 'c.name as course', 's.first_name', 's.family_name', 'r.score')
             .from('results as r')
             .innerJoin('students as s', 's.id', 'r.student_id')
-            .innerJoin('courses as c', 'c.id', 'r.course_id');
+            .innerJoin('courses as c', 'c.id', 'r.course_id')
+            .orderBy('r.uid');
         return res.json(resultsData);
     } catch (err) {
         return next(errorHandler({ error: err }));

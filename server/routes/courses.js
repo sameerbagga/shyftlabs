@@ -13,7 +13,7 @@ router.delete('/:id', deleteCourseById);
 
 async function getCourses(req, res, next) {
     try {
-        const courseList = await dbConn.select('*').from('courses');
+        const courseList = await dbConn.select('*').from('courses').orderBy('id');
         return res.json(courseList);
     } catch (err) {
         return next(errorHandler({ error: err }));

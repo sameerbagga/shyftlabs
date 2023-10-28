@@ -39,7 +39,7 @@ const studentSchema = {
 
 async function getStudents(req, res, next) {
     try {
-        const studentsData = await dbConn.select('*').from('students');
+        const studentsData = await dbConn.select('*').from('students').orderBy('id');
         return res.json(studentsData);
     } catch (err) {
         return next(errorHandler({ error: err }));
